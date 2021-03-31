@@ -1,0 +1,39 @@
+<!--index.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+
+    <!--Loop over the `payload` variable, which is the list of articles-->
+    {{range .payload }}
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+      <!--Create the link for the article based on its ID-->
+      <thead>
+        <th class="col-md-1">Nama Barang</th>
+        <th class="col-md-2">
+          <a href="/barang/view/{{.ID}}">
+            <!--Display the title of the article -->
+            <h3>{{.Nama}}</h2>
+          </a>
+         </th>
+       </thead>
+       <tbody>
+      <!--Display the content of the article-->
+      <tr>
+        <td class="col-md-1">Harga Barang</td>
+        <td class="col-md-2">Rp.{{.Harga}},-</td>
+      </tr>
+      <tr>
+        <td class="col-md-1">Posting</td>
+        <td class="col-md-2">{{.User}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+    {{end}}
+      
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}
