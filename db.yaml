@@ -1,7 +1,0 @@
-DB:
-  ADDRES: "tcp"
-  HOST: "localhost"
-  PORT: "3306"
-  USERNAME: "root"
-  PASSWORD: ""
-  DBNAME : "Simple_Shop"
