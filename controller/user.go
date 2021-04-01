@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"project/shop/data"
 
@@ -12,19 +13,25 @@ func Login(c *gin.Context) {
 	session := sessions.Default(c)
 	Username := c.PostForm("loginUsername")
 	Password := c.PostForm("loginPass")
-
-	User, err := data.GetUserLogin(Username, Password)
-	_ = User // harusnya nanti masukkan ke auth
-	if err != nil {
+	User := data.GetUserLogin(Username)
+	if User == nil {
 		Render(c, gin.H{
 			"tittle": "login",
-			"status": err.Error(),
+			"status": "user tidak ada",
 		}, "login.html")
 	} else {
-		session.Set("id", User.ID)
-		session.Set("username", User.Username)
-		session.Save()
-		c.Redirect(http.StatusMovedPermanently, "/dasbord/")
+		if User.Password == Password {
+			session.Set("id", User.ID)
+			session.Set("username", User.Username)
+			session.Save()
+			c.Redirect(http.StatusMovedPermanently, "/dasbord/")
+		} else {
+			Render(c, gin.H{
+				"tittle": "login",
+				"status": "Password Salah",
+			}, "login.html")
+		}
+
 	}
 }
 
@@ -37,8 +44,10 @@ func RenderLogin(c *gin.Context) {
 func RenderDasbord(c *gin.Context) {
 	session := sessions.Default(c)
 	username := session.Get("username")
+	strUsername := fmt.Sprintf("%v", username)
+	fmt.Println(strUsername)
 	Render(c, gin.H{
-		"title":    "Dasbord",
-		"username": username,
+		"title":   "Dasbord",
+		"payload": strUsername,
 	}, "dasbord.html")
 }

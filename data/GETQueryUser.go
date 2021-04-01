@@ -23,13 +23,13 @@ func ExtractQueryUserYml(name string, location string) *QueryUser {
 		fmt.Printf("Error reading config file, %s", err)
 	}
 	//set dauflt
-	viper.SetDefault("QUERYUSER.UNIQValueDefalt", "DefaultValue")
+	viper.SetDefault("USER.UNIQValueDefalt", "ThisIsValueDefault")
 	//tampung nilainya
-	Create, ok := viper.Get("QUERYUSER.CREATE").(string)
-	Read, ok := viper.Get("QUERYUSER.READ").(string)
-	PartialRead, ok := viper.Get("QUERYUSER.PARTIALREAD").(string)
-	Update, ok := viper.Get("QUERYUSER.UPDATE").(string)
-	Delete, ok := viper.Get("QUERYUSER.DELETE").(string)
+	Create, ok := viper.Get("USER.CREATE").(string)
+	Read, ok := viper.Get("USER.READ").(string)
+	PartialRead, ok := viper.Get("USER.PARTIALREAD").(string)
+	Update, ok := viper.Get("USER.UPDATE").(string)
+	Delete, ok := viper.Get("USER.DELETE").(string)
 	if !ok {
 		log.Fatalf("Invalid type assertion")
 	}
@@ -48,7 +48,7 @@ func ExtractQueryUserYml(name string, location string) *QueryUser {
 //GetAllUser adalah fungsi untuk GET semua user dari database
 func GetAllUser() *[]UserData {
 	//ambil dulu semua data dari queryUser
-	QueryRead := ExtractQueryYml("queryUser", ".")
+	QueryRead := ExtractQueryUserYml("User", ".")
 	//buatlah penampung
 	var User []UserData
 	//buat SQLnya
@@ -71,15 +71,25 @@ func GetUserByID(id int) (*UserData, error) {
 	return nil, errors.New("User tidak ada")
 }
 
-func GetUserLogin(user string, pass string) (*UserData, error) {
+func GetUserLogin(user string) *UserData {
 	//panggil extract value dari queryuser
-	Query := ExtractQueryUserYml("queryUser", ".")
+	//Query := ExtractQueryUserYml("queryUser", ".")
 	//buatlah variabel untuk menampung nilainya nanti
-	var userTamp UserData
-	_, err := dbmap.Select(&userTamp, Query.PARTIALREAD, user, pass)
-	if err != nil {
-		return nil, err
+	userAll := GetAllUser()
+	/*
+		var userTamp UserData
+		_, err := dbmap.Select(&userTamp, "SELECT * FROM User WHERE `U_Username` = ? LIMIT 1", user)
+		if err != nil {
+			return nil, err
+		}
+		//kembalikan nilainya
+		return &userTamp, nil
+	*/
+	fmt.Println(userAll)
+	for _, tamp := range *userAll {
+		if tamp.Username == user {
+			return &tamp
+		}
 	}
-	//kembalikan nilainya
-	return &userTamp, nil
+	return nil
 }

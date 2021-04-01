@@ -14,11 +14,6 @@ func main() {
 	redisTamp := middleware.ExtractRedisYml("redis", ".")
 	store, _ := redis.NewStore(10, redisTamp.NETWORK, redisTamp.ADDRESS, redisTamp.PASSWORD, []byte(redisTamp.KEYPAIRS))
 	router.Use(sessions.Sessions("mysession", store))
-	/*
-		store, _ := redis.NewStore(10, "tcp", "localhost:6379", "", []byte("secret"))
-		//storing session
-		router.Use(sessions.Sessions("mysession", store))
-	*/
 	router.LoadHTMLGlob("templete/*")
 	router.GET("/", controller.ShowIndexPage)
 	router.GET("/barang/view/:barang_id", controller.GetBarang)
