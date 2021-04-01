@@ -1,18 +1,19 @@
 package data
 
 import (
+	"errors"
 	"fmt"
 	"log"
 
 	"github.com/spf13/viper"
 )
 
-func ExtractQueryYml() *Query {
+func ExtractQueryYml(name string, location string) *Query {
 	var Que Query
 	//kasih tahu nama filenya
-	viper.SetConfigName("query")
+	viper.SetConfigName(name)
 	//beritahu lokasinya
-	viper.AddConfigPath(".")
+	viper.AddConfigPath(location)
 	//beri izin viper
 	viper.AutomaticEnv()
 	//beritahu formtnya
@@ -43,7 +44,7 @@ func ExtractQueryYml() *Query {
 }
 
 func GetDataBarang() *[]DataBarang {
-	Query := ExtractQueryYml()
+	Query := ExtractQueryYml("query", ".")
 	var data []DataBarang
 	_, err := dbmap.Select(&data, Query.READ)
 
@@ -52,4 +53,13 @@ func GetDataBarang() *[]DataBarang {
 	}
 	return &data
 
+}
+
+//GetBarangById merupakan fungsi untuk mencari barang berdasarkan idnya
+func GetBarangById(Id int) (*DataBarang, error) {
+	barang := GetDataBarang()
+	for _, a := range *barang {
+		return &a, nil
+	}
+	return nil, errors.New("Barang Tidak ada")
 }

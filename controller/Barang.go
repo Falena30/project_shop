@@ -3,6 +3,7 @@ package controller
 import (
 	"net/http"
 	"project/shop/data"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -30,4 +31,18 @@ func ShowIndexPage(c *gin.Context) {
 		"payload": barang,
 	}, "index.html")
 
+}
+
+func GetBarang(c *gin.Context) {
+	//format param barang id menjadi int
+	if barangID, err := strconv.Atoi(c.Param("barang_id")); err == nil {
+		//dapatkan barangnya berdasarkan idnya
+		if barang, err := data.GetBarangById(barangID); err == nil {
+			//render barang ke hmtl
+			render(c, gin.H{
+				"title":   barang.Nama,
+				"payload": barang,
+			}, "barang.html")
+		}
+	}
 }

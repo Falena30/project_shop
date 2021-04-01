@@ -5,6 +5,7 @@ Ingat fundamental gunkan .env .gitignore .ymal atau ainnya dan buat reusable cod
    b. backend connection ke database
    c. buat backend read database
    d. render ke html
+   e. read barang dengan idnya
 2. login 
    a. login html untuk UI
    b. backed login untuk verify user

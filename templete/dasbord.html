@@ -1,0 +1,33 @@
+<!--dasbord.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+<!--Code Here-->
+<div class="col-12 col-md-8">
+    <div class="table-responsive">
+        <table lass="table table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-1">
+                        <form action="/dasbord/masukkan_barang">
+                            <button type="submit" class="btn btn-outline-secondary"> Masukkan Barang</button>
+                        </form>
+                    </td>
+                    <td class="col-md-1">
+                        <form action="/dasbord/edit_barang">
+                            <button type="submit" class="btn btn-outline-secondary"> Edit Barang</button>
+                        </form>
+                    </td>
+                    <td class="col-md-1">
+                        <form action="/dasbord/Hapus_barang">
+                            <button type="submit" class="btn btn-outline-secondary"> Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>   
+        </table>
+    </div>
+</div>
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

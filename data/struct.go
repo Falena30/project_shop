@@ -28,3 +28,18 @@ type Query struct {
 	UPDATE string
 	DELETE string
 }
+
+type QueryUser struct {
+	CREATE      string
+	READ        string
+	UPDATE      string
+	DELETE      string
+	PARTIALREAD string
+}
+
+type RedisData struct {
+	NETWORK  string
+	ADDRESS  string
+	PASSWORD string
+	KEYPAIRS string
+}
