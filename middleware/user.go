@@ -50,12 +50,8 @@ func AuthUser() gin.HandlerFunc {
 		sessionsID := session.Get("id")
 		sessionUsername := session.Get("username")
 		if sessionsID == nil && sessionUsername == nil {
-			c.JSON(http.StatusNotFound, gin.H{
-				"pesan": "Tidak Berwenang",
-			})
+			c.Redirect(http.StatusMovedPermanently, "/login/")
 			c.Abort()
-		} else {
-
 		}
 	}
 }

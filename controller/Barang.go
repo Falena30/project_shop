@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func render(c *gin.Context, data gin.H, templateName string) {
+func Render(c *gin.Context, data gin.H, templateName string) {
 
 	//buatlah perpindahan apabla yang diinginkan JSON,XML, atau HTML
 	switch c.Request.Header.Get("Accept") {
@@ -26,7 +26,7 @@ func render(c *gin.Context, data gin.H, templateName string) {
 
 func ShowIndexPage(c *gin.Context) {
 	barang := data.GetDataBarang()
-	render(c, gin.H{
+	Render(c, gin.H{
 		"title":   "Home Page",
 		"payload": barang,
 	}, "index.html")
@@ -39,7 +39,7 @@ func GetBarang(c *gin.Context) {
 		//dapatkan barangnya berdasarkan idnya
 		if barang, err := data.GetBarangById(barangID); err == nil {
 			//render barang ke hmtl
-			render(c, gin.H{
+			Render(c, gin.H{
 				"title":   barang.Nama,
 				"payload": barang,
 			}, "barang.html")
