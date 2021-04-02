@@ -9,8 +9,12 @@
         <a class="navbar-brand" href="/login">
           Login
         </a>
-        <a class="navbar-brand" href="/logout">
-          Logout
+        <a class="navbar-brand">
+          <form action="/logout/" method="POST">
+            <div class="form-group">
+              <input type="submit" name="loginUser" value="Logout" class="btn btn-danger btn-block">
+            </div>
+          </form>
         </a>
       </div>
     </div>

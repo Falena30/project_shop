@@ -55,3 +55,13 @@ func AuthUser() gin.HandlerFunc {
 		}
 	}
 }
+
+//SetSession adalah fungsi untuk memberikan nilai pada session, fungsi ini masih perlu diperbaiki
+func SetSession(id interface{}, user interface{}) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		session := sessions.Default(c)
+		session.Set("id", id)
+		session.Set("username", user)
+		session.Save()
+	}
+}

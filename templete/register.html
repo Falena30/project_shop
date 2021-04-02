@@ -1,0 +1,33 @@
+<!--Register.html-->
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+<!--Code Register Here-->
+<body>
+  <h1>{{ .status }}</h1>
+    <div class="container">
+      <div class="row justify-content-center mt-5">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header bg-transparent mb-0"><h5 class="text-center"><span class="font-weight-bold text-primary">Register</span></h5></div>
+            <div class="card-body">
+              <form action="/register/" method="POST">
+                <div class="form-group">
+                  <input type="text" name="regisUsername" class="form-control" placeholder="Username">
+                </div>
+                <div class="form-group">
+                  <input type="password" name="regisPass" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <input type="submit" name="registerUser" value="Register" class="btn btn-success btn-block">
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

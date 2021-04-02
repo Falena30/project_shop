@@ -15,13 +15,27 @@ func main() {
 	store, _ := redis.NewStore(10, redisTamp.NETWORK, redisTamp.ADDRESS, redisTamp.PASSWORD, []byte(redisTamp.KEYPAIRS))
 	router.Use(sessions.Sessions("mysession", store))
 	router.LoadHTMLGlob("templete/*")
+	//index
 	router.GET("/", controller.ShowIndexPage)
 	router.GET("/barang/view/:barang_id", controller.GetBarang)
+	//login
 	login := router.Group("/login")
 	{
 		login.GET("/", controller.RenderLogin)
 		login.POST("/", controller.Login)
 	}
+	//logout
+	logout := router.Group("/logout")
+	{
+		logout.POST("/", controller.Logout)
+	}
+	//register
+	register := router.Group("/register")
+	{
+		register.GET("/", controller.RenderRegister)
+		register.POST("/", controller.Register)
+	}
+	//dasbord
 	dasbord := router.Group("/dasbord")
 	dasbord.Use(middleware.AuthUser())
 	{
