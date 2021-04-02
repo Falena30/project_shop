@@ -40,6 +40,8 @@ func main() {
 	dasbord.Use(middleware.AuthUser())
 	{
 		dasbord.GET("/", controller.RenderDasbord)
+		dasbord.GET("/input", controller.GetInputBarang)
+		dasbord.POST("/input", middleware.MiddleInputBarang)
 	}
 	router.Run()
 }

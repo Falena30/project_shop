@@ -11,14 +11,14 @@ Ingat fundamental gunkan .env .gitignore .ymal atau ainnya dan buat reusable cod
    b. backed login untuk verify user
    c. authentic login
    d. jika berhasil render dasbord jika gagal kembali ke login dan diberi tahu errornya
-3. register
+3. register (done)
    a. sama seperti login
-4. dasbord
+4. dasbord (done)
    a. dasbord UI 
-   b. pilihan edit input delete
+   b. pilihan edit input delete 
    c. backend dasbord
    d. logout
-5. input barang
+5. input barang (done)
    a. input UI
    b. penerimaan data dari HTML ke backend (POST)
    c. middleware prosess

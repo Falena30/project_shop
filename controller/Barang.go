@@ -46,3 +46,9 @@ func GetBarang(c *gin.Context) {
 		}
 	}
 }
+
+func GetInputBarang(c *gin.Context) {
+	Render(c, gin.H{
+		"title": "Input Barang Page",
+	}, "input.html")
+}
