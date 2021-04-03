@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"project/shop/data"
 	"strconv"
@@ -38,6 +39,7 @@ func GetBarang(c *gin.Context) {
 	if barangID, err := strconv.Atoi(c.Param("barang_id")); err == nil {
 		//dapatkan barangnya berdasarkan idnya
 		if barang, err := data.GetBarangById(barangID); err == nil {
+			fmt.Println(barang)
 			//render barang ke hmtl
 			Render(c, gin.H{
 				"title":   barang.Nama,

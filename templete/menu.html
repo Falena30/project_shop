@@ -1,6 +1,6 @@
 <!--menu.html-->
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-dark justify-content-between" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">
@@ -9,13 +9,13 @@
         <a class="navbar-brand" href="/login">
           Login
         </a>
-        <a class="navbar-brand">
-          <form action="/logout/" method="POST">
-            <div class="form-group">
-              <input type="submit" name="loginUser" value="Logout" class="btn btn-danger btn-block">
-            </div>
-          </form>
-        </a>
       </div>
+      <a class="navbar-brand navbar-right">
+        <form class="form-inline" action="/logout/" method="POST">
+          <div class="form-group">
+            <input type="submit" value="Logout" class="btn btn-danger btn-block">
+          </div>
+        </form>
+    </a>
     </div>
   </nav>

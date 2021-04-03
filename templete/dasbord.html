@@ -2,32 +2,66 @@
 
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
-<h1>{{.payload}}</h1>
-<!--Code Here-->
-<div class="col-12 col-md-8">
-    <div class="table-responsive">
-        <table lass="table table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-1">
-                        <form action="/dasbord/input">
-                            <button type="submit" class="btn btn-outline-secondary"> Masukkan Barang</button>
-                        </form>
-                    </td>
-                    <td class="col-md-1">
-                        <form action="/dasbord/edit_barang">
-                            <button type="submit" class="btn btn-outline-secondary"> Edit Barang</button>
-                        </form>
-                    </td>
-                    <td class="col-md-1">
-                        <form action="/dasbord/Hapus_barang">
-                            <button type="submit" class="btn btn-outline-secondary"> Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>   
-        </table>
-    </div>
+<h2>
+  {{.username}}
+</h2>
+  <div class="table-responsive">
+    <table style="border-collapse: separate;border-spacing: 10px;">
+      <tbody>
+        <tr>
+          <td>
+            <form action="/dasbord/input">
+              <button type="submit" class="btn btn-primary"> Masukkan Barang</button>
+            </form>
+          </td>
+          <td>
+            <form action="/dasbord/input">
+              <button type="submit" class="btn btn-primary"> Masukkan Barang baru</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <!--Loop over the `payload` variable, which is the list of articles-->
+    {{range .payload }}
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+      <!--Create the link for the article based on its ID-->
+      <thead>
+        <th class="col-md-1">Nama Barang</th>
+        <th class="col-md-2">
+          <a href="/barang/view/{{.ID}}">
+            <!--Display the title of the article -->
+            <h3>{{.Nama}}</h3>
+          </a>
+         </th>
+       </thead>
+       <tbody>
+      <!--Display the content of the article-->
+      <tr>
+        <td class="col-md-1">Harga Barang</td>
+        <td class="col-md-2">Rp.{{.Harga}},-</td>
+      </tr>
+      <tr>
+        <td class="col-md-1">Posting</td>
+        <td class="col-md-2">{{.User}}</td>
+      </tr>
+      
+      </tbody>
+    </table>
+    <table>
+      <tbody>
+        <tr style="border: hidden;">
+          <td class="col-md-1"><a class="btn btn-info" href="/dasbord/edit_barang/{{.ID}}" >Edit</a> </td>
+          <td class="col-md-2" ><a class="btn btn-danger" href="/dasbord/delete_barang/{{.ID}}" >Delete</a> </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+    {{end}}
+
 <!--Embed the footer.html template at this location-->
 {{ template "footer.html" .}}

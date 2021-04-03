@@ -13,8 +13,10 @@ Ingat fundamental gunkan .env .gitignore .ymal atau ainnya dan buat reusable cod
    d. jika berhasil render dasbord jika gagal kembali ke login dan diberi tahu errornya
 3. register (done)
    a. sama seperti login
-4. dasbord (done)
-   a. dasbord UI 
+4. dasbord (not yet)
+   a. dasbord UI
+      i. buatlah tabelnya tapi cuma yang posting saja
+      ii. kalau login sebagai admin baru perlihatkan semuanya 
    b. pilihan edit input delete 
    c. backend dasbord
    d. logout

@@ -50,8 +50,7 @@ func Register(c *gin.Context) {
 			"status": err,
 		}, "register.html")
 	} else {
-		session.Set("id", Username)
-		session.Set("username", Password)
+		session.Set("username", Username)
 		session.Save()
 		c.Redirect(http.StatusMovedPermanently, "/dasbord/")
 	}
@@ -95,10 +94,36 @@ func RenderRegister(c *gin.Context) {
 
 func RenderDasbord(c *gin.Context) {
 	session := sessions.Default(c)
+	//ambil nilai sessionya
 	username := session.Get("username")
+	sessionID := session.Get("id")
+	//jika nilai sessionIDnya kosong
+	//tentukan beri nilainya dengan mengambil id dari database
+	if sessionID == nil {
+		AllUser := data.GetAllUser()
+		for _, a := range *AllUser {
+			if a.Username == a.Username {
+				session.Set("id", a.ID)
+				sessionID = session.Get("id")
+			}
+		}
+	}
+	//tampung username kedalam string
 	strUsername := fmt.Sprintf("%v", username)
-	Render(c, gin.H{
-		"title":   "Dasbord",
-		"payload": strUsername,
-	}, "dasbord.html")
+	//cari barang yang di posting oleh user
+	BarangByUser, err := data.GetDataBarangByIDUser(sessionID.(int))
+	if err != nil {
+		Render(c, gin.H{
+			"title":    "Dasbord",
+			"username": strUsername,
+			"payload":  nil,
+		}, "dasbord.html")
+	} else {
+		Render(c, gin.H{
+			"title":    "Dasbord",
+			"username": strUsername,
+			"payload":  BarangByUser,
+		}, "dasbord.html")
+	}
+
 }
