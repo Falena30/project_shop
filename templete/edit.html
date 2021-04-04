@@ -1,0 +1,33 @@
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+<h1 style="text-align: center;">{{.status}}</h1>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-xs-6">
+        <div class="card">
+          <div class="card-header bg-transparent mb-0"><h5 class="text-center"><span class="font-weight-bold text-primary">Edit Barang</span></h5></div>
+          <div class="card-body">
+            <form action="/dasbord/barang/view/{{.payload.ID}}/edit/" method="POST">
+              <div class="form-group">
+                <label for="NBarang">Nama Barang:</label>
+                <input type="text" name="namaBarangEdit" class="form-control" value="{{.payload.Nama}}">
+              </div>
+              <div class="form-group">
+                <label for="HBarang">Harga Barang:</label>
+                <input type="number" name="hargaBarangEdit" class="form-control" value="{{.payload.Harga}}">
+              </div>
+              <div class="form-group">
+                <label for="User">Post By:</label>
+                <input type="text" name="userEdit" class="form-control" value="{{.payload.User}}" disabled>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="edit" class="btn btn-success btn-block">
+              </div>              
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

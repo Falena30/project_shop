@@ -1,0 +1,18 @@
+<script> 
+
+    var form = document.getElementById("form-group");
+    
+        function makePUTrequest() { 
+            $.ajax({ 
+                url: '{{.payload.ID}}', 
+                type: 'PUT', 
+            }); 
+        } 
+      
+        function makeDELETErequest() { 
+            $.ajax({ 
+                url: '{{.payload.ID}}', 
+                type: 'DELETE', 
+            }); 
+        } 
+      </script> 

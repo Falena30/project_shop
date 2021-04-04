@@ -42,6 +42,10 @@ func main() {
 		dasbord.GET("/", controller.RenderDasbord)
 		dasbord.GET("/input", controller.GetInputBarang)
 		dasbord.POST("/input", middleware.MiddleInputBarang)
+		dasbord.GET("/barang/view/:barang_id", controller.GetDashbordViewBarang)
+		dasbord.GET("/barang/view/:barang_id/edit/", controller.RenderPutBarang)
+		dasbord.POST("/barang/view/:barang_id/edit/", middleware.PutDataBarang)
+		dasbord.DELETE("/barang/view/:barang_id/delete", middleware.DeleteBarangOK())
 	}
 	router.Run()
 }

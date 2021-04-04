@@ -1,0 +1,45 @@
+  
+<!--article.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+{{ template "popup.html" .}}
+<div class="col-xs-6">
+  <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="col-md-1">Keterangan</th>
+                  <th class="col-md-2">{{.payload.Nama}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="col-md-1">ID Barang</td>
+                  <td class="col-md-2">{{.payload.ID}}</td>
+                </tr>
+                <tr>
+                  <td class="col-md-1">Harga Barang</td>
+                  <td class="col-md-2">Rp.{{.payload.Harga}},-</td>
+                </tr>
+                 <tr>
+                  <td class="col-md-1">Posting</td>
+                  <td class="col-md-2">{{.payload.User}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+                <tbody>
+                  <tr style="border: hidden;">
+                    <td class="col-md-1"><a class="btn btn-info" href="/dasbord/barang/view/{{.payload.ID}}/edit/" >Edit</a> </td>
+                    <td class="col-md-2" ><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal">
+                      Delete
+                    </button></td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+</div>
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

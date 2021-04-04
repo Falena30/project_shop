@@ -2,8 +2,9 @@
 
 <!--Embed the header.html template at this location-->
 {{ template "header.html" .}}
+<h1 style="text-align: center;">{{.status}}</h1>
 <h2>
-  {{.username}}
+  Hallo {{.username}}
 </h2>
   <div class="table-responsive">
     <table style="border-collapse: separate;border-spacing: 10px;">
@@ -12,11 +13,6 @@
           <td>
             <form action="/dasbord/input">
               <button type="submit" class="btn btn-primary"> Masukkan Barang</button>
-            </form>
-          </td>
-          <td>
-            <form action="/dasbord/input">
-              <button type="submit" class="btn btn-primary"> Masukkan Barang baru</button>
             </form>
           </td>
         </tr>
@@ -32,7 +28,7 @@
       <thead>
         <th class="col-md-1">Nama Barang</th>
         <th class="col-md-2">
-          <a href="/barang/view/{{.ID}}">
+          <a href="/dasbord/barang/view/{{.ID}}">
             <!--Display the title of the article -->
             <h3>{{.Nama}}</h3>
           </a>
@@ -48,15 +44,6 @@
         <td class="col-md-1">Posting</td>
         <td class="col-md-2">{{.User}}</td>
       </tr>
-      
-      </tbody>
-    </table>
-    <table>
-      <tbody>
-        <tr style="border: hidden;">
-          <td class="col-md-1"><a class="btn btn-info" href="/dasbord/edit_barang/{{.ID}}" >Edit</a> </td>
-          <td class="col-md-2" ><a class="btn btn-danger" href="/dasbord/delete_barang/{{.ID}}" >Delete</a> </td>
-        </tr>
       </tbody>
     </table>
   </div>

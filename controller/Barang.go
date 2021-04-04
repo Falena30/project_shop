@@ -49,8 +49,36 @@ func GetBarang(c *gin.Context) {
 	}
 }
 
+func GetDashbordViewBarang(c *gin.Context) {
+	//format param barang id menjadi int
+	if barangID, err := strconv.Atoi(c.Param("barang_id")); err == nil {
+		//dapatkan barangnya berdasarkan idnya
+		if barang, err := data.GetBarangById(barangID); err == nil {
+			fmt.Println(barang)
+			//render barang ke hmtl
+			Render(c, gin.H{
+				"title":   barang.Nama,
+				"payload": barang,
+			}, "detailBarangUser.html")
+		}
+	}
+}
+
 func GetInputBarang(c *gin.Context) {
 	Render(c, gin.H{
 		"title": "Input Barang Page",
 	}, "input.html")
+}
+
+func RenderPutBarang(c *gin.Context) {
+	if barangID, err := strconv.Atoi(c.Param("barang_id")); err == nil {
+		if barang, _ := data.GetBarangById(barangID); barang != nil {
+			Render(c, gin.H{
+				"title":   "Edit Barang",
+				"payload": barang,
+			}, "edit.html")
+		}
+	} else {
+		c.AbortWithStatus(http.StatusNotFound)
+	}
 }
