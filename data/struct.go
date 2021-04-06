@@ -13,6 +13,14 @@ type UserData struct {
 	Password string `db:"U_Password" json:"password"`
 }
 
+type UserDataDetail struct {
+	ID       int    `db:"ID_User" json:"id_u"`
+	Username string `db:"U_Username" json:"username"`
+	Fname    string `db:"First_Name" json:"first_name"`
+	LName    string `db:"Last_Name" json:"last_name"`
+	Bio      string `db:"Biodata" json:"biodata"`
+}
+
 type DBYaml struct {
 	HOST     string
 	PORT     string
@@ -29,6 +37,9 @@ type Query struct {
 	DELETE string
 }
 
+type UserDetail struct {
+	QueryBasic Query
+}
 type QueryUser struct {
 	CREATE      string
 	READ        string

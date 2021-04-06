@@ -100,3 +100,27 @@ func TemplateExtractYml(name string, location string) {
 		fmt.Printf("Error reading config file, %s", err)
 	}
 }
+
+func ExtractQueryUserDetailYml(name string, location string) *QueryUser {
+	var Que QueryUser
+	TemplateExtractYml(name, location)
+	//set dauflt
+	viper.SetDefault("USERDETAIL.UNIQValueDefalt", "DefaultValue")
+	//tampung nilainya
+	Create, ok := viper.Get("USERDETAIL.CREATE").(string)
+	Read, ok := viper.Get("USERDETAIL.READ").(string)
+	Update, ok := viper.Get("USERDETAIL.UPDATE").(string)
+	Delete, ok := viper.Get("USERDETAIL.DELETE").(string)
+	if !ok {
+		log.Fatalf("Invalid type assertion")
+	}
+	//pmasukkan data kedalam struct QUERY
+	Que = QueryUser{
+		CREATE: Create,
+		READ:   Read,
+		UPDATE: Update,
+		DELETE: Delete,
+	}
+	//kembalikan nilainya
+	return &Que
+}

@@ -33,7 +33,6 @@ func GetUserByID(id int) (*UserData, error) {
 
 func GetUserLogin(user string) *UserData {
 	userAll := GetAllUser()
-	fmt.Println(userAll)
 	for _, tamp := range *userAll {
 		if tamp.Username == user {
 			return &tamp

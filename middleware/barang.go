@@ -52,10 +52,15 @@ func DeleteBarangOK() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		IDBarang, _ := strconv.Atoi(c.Param("barang_id"))
 		if err := data.DeleteDataBarang(IDBarang); err != nil {
-			panic(err.Error())
+			controller.Render(c, gin.H{
+				"tittle": "Status Page",
+				"status": err.Error(),
+			}, "status.html")
 		} else {
-			c.Redirect(http.StatusMovedPermanently, "/dasbord")
-			c.Abort()
+			controller.Render(c, gin.H{
+				"tittle": "Status Page",
+				"status": "Delete berehasil",
+			}, "status.html")
 		}
 	}
 }

@@ -1,0 +1,35 @@
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+
+<div class="col-xs-6">
+    <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th class="col-md-1">Username</th>
+                    <th class="col-md-2">{{.payload.Username}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="col-md-1">First Name</td>
+                    <td class="col-md-2">{{.payload.Fname}}</td>
+                  </tr>
+                  <tr>
+                    <td class="col-md-1">Last Name</td>
+                    <td class="col-md-2">{{.payload.LName}},-</td>
+                  </tr>
+                   <tr>
+                    <td class="col-md-1">Biodata</td>
+                    <td class="col-md-2">{{.payload.Bio}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+  </div>
+  
+  
+      
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

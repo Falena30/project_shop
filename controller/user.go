@@ -39,11 +39,22 @@ func Login(c *gin.Context) {
 }
 
 func Register(c *gin.Context) {
+	//ambil semua user
+	userAll := data.GetAllUser()
 	session := sessions.Default(c)
 	Username := c.PostForm("regisUsername")
 	Password := c.PostForm("regisPass")
 	HPassword, err := bcrypt.GenerateFromPassword([]byte(Password), bcrypt.DefaultCost)
-	err = data.CreateUser(Username, string(HPassword))
+	for _, a := range *userAll {
+		if a.Username == Username {
+			Render(c, gin.H{
+				"tittle": "register",
+				"status": "username sudah ada",
+			}, "register.html")
+		} else {
+			err = data.CreateUser(Username, string(HPassword))
+		}
+	}
 	if err != nil {
 		Render(c, gin.H{
 			"tittle": "register",
